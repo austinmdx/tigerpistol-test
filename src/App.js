@@ -11,7 +11,9 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get('https://tppublic.blob.core.windows.net/test-data/super-heroes.json');
-      setHerosData(res.data.map((hero) => ({ id: hero.id, name: hero.name, url: hero.image?.url })));
+      setHerosData(res.data.map((hero) => ({
+        id: hero.id, name: hero.name, realName: hero.biography['full-name'], url: hero.image?.url,
+      })));
     }
     fetchData();
   }, []);

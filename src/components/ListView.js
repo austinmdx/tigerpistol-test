@@ -1,8 +1,8 @@
 const ListView = ({ data }) => (
   <ul>
-    { data.map(({ id }) => (
+    { data.map(({ id, name, realName }) => (
       <li key={id}>
-        {id}  Hero Name (Real Name)
+        {id}  {name}({realName})
       </li>
     )) }
   </ul>
