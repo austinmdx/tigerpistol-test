@@ -1,0 +1,14 @@
+.card {
+  padding-top: 130%;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.card .title {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  color: white;
+}
