@@ -34,11 +34,8 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
-          ECR_REGISTRY: 'test'
-          IMAGE_TAG: ${{ github.sha }}
           REGISTRY_TOKEN: '${{ secrets.REGISTRY_TOKEN }}'
           FONTAWESOME_TOKEN: ${{ secrets.FONTAWESOME_TOKEN }}
         run: |
-          docker build -t '$ECR_REGISTRY:$IMAGE_TAG' --build-arg REGISTRY_TOKEN=$REGISTRY_TOKEN  --build-arg FONTAWESOME_TOKEN=$FONTAWESOME_TOKEN .
-          docker push $ECR_REGISTRY:$IMAGE_TAG
-          echo "::set-output name=image::$ECR_REGISTRY:$IMAGE_TAG"
+          docker build --build-arg REGISTRY_TOKEN=$REGISTRY_TOKEN  --build-arg FONTAWESOME_TOKEN=$FONTAWESOME_TOKEN .
+          echo "::set-output ===="
