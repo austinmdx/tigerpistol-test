@@ -1,13 +1,8 @@
 name: Docker Image CI
 
 on:
-  workflow_dispatch:
-  # the 1st condition
-  workflow_run:
-    workflows: ["Run Tests"]
-    branches: [master]
-    types:
-      - completed
+  push:
+    branches: [ master ]
 
 env:
   AWS_REGION: us-east-1 # set this to your preferred AWS region, e.g. us-west-1
