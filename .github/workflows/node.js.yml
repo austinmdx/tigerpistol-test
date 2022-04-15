@@ -23,5 +23,8 @@ jobs:
         cache: 'npm'
         registry-url: 'https://registry.npmjs.org'
 
+    - run: echo "==== dir before npm ci ===="
+    - run: dir
     - run: npm ci
+    - run: echo "==== dir after npm ci ===="
     - run: dir
