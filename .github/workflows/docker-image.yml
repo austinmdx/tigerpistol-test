@@ -1,0 +1,44 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+  # the 1st condition
+  workflow_run:
+    workflows: ["Run Tests"]
+    branches: [main]
+    types:
+      - completed
+
+env:
+  AWS_REGION: us-east-1 # set this to your preferred AWS region, e.g. us-west-1
+  ECR_REPOSITORY: outreach # set this to your Amazon ECR repository name
+  ECS_SERVICE: outreach-service # set this to your Amazon ECS service name
+  ECS_CLUSTER: outreach-cluster # set this to your Amazon ECS cluster name
+  CONTAINER_NAME:
+    outreach_container # set this to the name of the container in the
+    # containerDefinitions section
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cache with npm
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "npm"
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: 'test'
+          IMAGE_TAG: ${{ github.sha }}
+          REGISTRY_TOKEN: '${{ secrets.REGISTRY_TOKEN }}'
+          FONTAWESOME_TOKEN: ${{ secrets.FONTAWESOME_TOKEN }}
+        run: |
+          docker build -t '$ECR_REGISTRY:$IMAGE_TAG' --build-arg REGISTRY_TOKEN=$REGISTRY_TOKEN  --build-arg FONTAWESOME_TOKEN=$FONTAWESOME_TOKEN .
+          docker push $ECR_REGISTRY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY:$IMAGE_TAG"
