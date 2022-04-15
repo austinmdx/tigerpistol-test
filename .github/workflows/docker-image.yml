@@ -5,7 +5,7 @@ on:
   # the 1st condition
   workflow_run:
     workflows: ["Run Tests"]
-    branches: [main]
+    branches: [master]
     types:
       - completed
 
