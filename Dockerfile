@@ -14,7 +14,7 @@ ENV REGISTRY_TOKEN $REGISTRY_TOKEN
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 RUN echo "========== First Workdir =========="
-RUN dir
+RUN ls
 COPY package.json ./
 #RUN yarn install --frozen-lockfile
 COPY .env.local ./
