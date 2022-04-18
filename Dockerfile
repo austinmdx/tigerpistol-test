@@ -26,6 +26,8 @@ RUN echo @fortawesome:registry=https://npm.fontawesome.com/ >> ~/.npmrc
 COPY package.json package-lock.json ./ 
 RUN echo '==== before npm ci ====='
 RUN ls -a
+RUN echo '===== get current file path before npm ci ====='
+RUN pwd
 RUN npm ci
 RUN echo '==== after npm ci ====='
 RUN ls -a
@@ -41,6 +43,8 @@ RUN echo > ~/.npmrc
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
 WORKDIR /app
+RUN echo '===== get current file path ====='
+RUN pwd
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN echo '==== Showing all dir ====='
