@@ -25,6 +25,8 @@ RUN echo @fortawesome:registry=https://npm.fontawesome.com/ >> ~/.npmrc
 # RUN npm install
 COPY package.json package-lock.json ./ 
 RUN npm ci
+RUN echo '==== after npm ci ====='
+RUN ls -a
 # COPY package.json package-lock.json ./ 
 # RUN npm ci --only=production --ignore-scripts
 
@@ -39,7 +41,7 @@ FROM node:16-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN echo 'Showing all dir'
+RUN echo '==== Showing all dir ====='
 RUN ls -a
 
 # Next.js collects completely anonymous telemetry data about general usage.
