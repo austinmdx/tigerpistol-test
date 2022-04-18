@@ -14,7 +14,7 @@ ENV REGISTRY_TOKEN $REGISTRY_TOKEN
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 RUN echo "========== First Workdir =========="
-RUN ls
+RUN ls -a
 COPY package.json ./
 #RUN yarn install --frozen-lockfile
 COPY .env.local ./
@@ -41,7 +41,7 @@ RUN echo > ~/.npmrc
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
 WORKDIR /app
-RUN dir
+RUN ls -a
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
