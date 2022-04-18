@@ -16,10 +16,6 @@ WORKDIR /app
 RUN echo "========== First Workdir =========="
 RUN ls -a
 COPY package.json ./
-#RUN yarn install --frozen-lockfile
-COPY .env.local ./
-
-RUN cat .env.local
 
 RUN echo //npm.pkg.github.com/:_authToken=$REGISTRY_TOKEN >> ~/.npmrc
 RUN echo @credasinc:registry=https://npm.pkg.github.com/ >> ~/.npmrc
