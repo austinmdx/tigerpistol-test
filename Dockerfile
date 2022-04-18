@@ -24,6 +24,8 @@ RUN echo @fortawesome:registry=https://npm.fontawesome.com/ >> ~/.npmrc
 
 # RUN npm install
 COPY package.json package-lock.json ./ 
+RUN echo '==== before npm ci ====='
+RUN ls -a
 RUN npm ci
 RUN echo '==== after npm ci ====='
 RUN ls -a
