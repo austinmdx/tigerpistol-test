@@ -24,7 +24,7 @@ jobs:
         registry-url: 'https://registry.npmjs.org'
 
     - run: echo "==== dir before npm ci ===="
-    - run: ls -a
+    - run: ls -a /home/runner/.npm
     - run: npm ci
     - run: echo "==== dir after npm ci ===="
     - run: ls -a
